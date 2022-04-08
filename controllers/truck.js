@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const api = require('../services/catalog.js');
+const api = require('../services/truck.js');
 const mapErrors = require('../utils/mapper.js');
 const { isAuth, isOwner } = require('../middlewares/guards.js');
 const preload = require('../middlewares/preload.js');
@@ -13,12 +13,14 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => { //isAuth(),
-    //console.log(req.user._id);
+    console.log(req.body);
    
     const item = {
         loading: req.body.loading,
         unloading: req.body.unloading,
         startingFrom: req.body.startingFrom,
+        validUntil: req.body.validUntil,
+        type: req.body.type,
         tons: req.body.tons,
         price: req.body.price,
         owner: req.user//._id
@@ -52,6 +54,8 @@ router.put('/:id', preload(), isOwner(), async (req, res) => {
         loading: req.body.loading,
         unloading: req.body.unloading,
         startingFrom: req.body.startingFrom,
+        validUntil: req.body.validUntil,
+        type: req.body.type,
         price: req.body.price,
         tons: req.body.tons
     }
