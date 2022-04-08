@@ -20,6 +20,7 @@ async function update(id, item) {
         existing.unloading = item.unloading;
         existing.startingFrom = item.startingFrom;
         existing.tons = item.tons;
+        existing.price = item.price;
 
       await existing.save();
 

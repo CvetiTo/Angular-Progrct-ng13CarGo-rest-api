@@ -25,7 +25,7 @@ async function start() {
     app.use(express.json());
     app.use(cors());
     app.use(auth());
-    app.use('/data/catalog', catalogController);
+    app.use('/data/loads', catalogController);
     app.use('/users', usersController);
 
     app.get('/', (req, res) => res.json({ message: 'Rest service operational'}));

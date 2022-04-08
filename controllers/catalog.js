@@ -3,22 +3,25 @@ const api = require('../services/catalog.js');
 const mapErrors = require('../utils/mapper.js');
 const { isAuth, isOwner } = require('../middlewares/guards.js');
 const preload = require('../middlewares/preload.js');
+const { json } = require('express/lib/response');
+const { createIndexes } = require('../models/User.js');
 
 router.get('/', async (req, res) => {
-    console.log(req.user);
     const data = await api.getAll();
-    //console.log('Read catalog')
+    console.log('Read catalog')
     //res.end();
     res.json(data);
 });
 
-router.post('/', isAuth(), async (req, res) => {
-    //console.log(req.body);
+router.post('/',isAuth(), async (req, res) => { 
+    console.log(req.body);
+   
     const item = {
         loading: req.body.loading,
         unloading: req.body.unloading,
         startingFrom: req.body.startingFrom,
         tons: req.body.tons,
+        price: req.body.price,
         owner: req.user._id
     }
 
@@ -37,19 +40,20 @@ router.post('/', isAuth(), async (req, res) => {
 
 router.get('/:id', preload(), (req, res) => {
     const item = res.locals.item; //await api.getById(req.params.id);
-    //console.log('Read record')
+    console.log('Read record')
     //res.end();
     res.json(item);
 });
 
 router.put('/:id', preload(), isOwner(), async (req, res) => {
-    //console.log('Update record')
+    console.log('Update record')
     //res.end();
     const itemId = req.params.id;
     const item = {
         loading: req.body.loading,
         unloading: req.body.unloading,
         startingFrom: req.body.startingFrom,
+        price: req.body.price,
         tons: req.body.tons
     }
 
@@ -64,7 +68,7 @@ router.put('/:id', preload(), isOwner(), async (req, res) => {
 });
 
 router.delete('/:id', preload(), isOwner(), async (req, res) => {
-    //console.log('Delete record')
+    console.log('Delete record')
     //res.end();
     
     try {
