@@ -6,6 +6,7 @@ const catalogController = require('./controllers/catalog.js');
 const truckController = require('./controllers/truck.js')
 const usersController = require('./controllers/users.js');
 const auth = require('./middlewares/auth.js');
+const { cookie } = require('express/lib/response');
 
 start();
 
@@ -24,7 +25,11 @@ async function start() {
     const app = express();
 
     app.use(express.json());
-    app.use(cors());
+    app.use(cors(
+        //{origin: ['http://localhost:3030', 'http://localhost:4200'],
+        //Credentials: true}
+        ));
+    //app.use(cookie);
     app.use(auth());
     app.use('/data/loads', catalogController);
     app.use('/data/trucks', truckController);

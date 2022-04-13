@@ -6,7 +6,7 @@ const itemSchema = new Schema({
     startingFrom: { type: String, required: true },
     tons: { type: Number, required: true },
     price: { type: Number},
-    offers: { type: [ObjectId], ref: 'Offer'},
+    offers: [{ type: ObjectId, ref: 'Offer'}],
     owner: { type: ObjectId, ref: 'User' },
 }, { timestamps: { createdAt: 'created_at' } });
 

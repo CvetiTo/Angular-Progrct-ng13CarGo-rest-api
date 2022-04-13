@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
     res.json(data);
 });
 
-router.post('/', async (req, res) => { //isAuth(),
-    console.log(req.body);
+router.post('/', isAuth(), async (req, res) => { //
+    console.log(req.user._id);
    
     const item = {
         loading: req.body.loading,
@@ -23,7 +23,7 @@ router.post('/', async (req, res) => { //isAuth(),
         type: req.body.type,
         tons: req.body.tons,
         price: req.body.price,
-        owner: req.user//._id
+        owner: req.user._id
     }
 
     try {
