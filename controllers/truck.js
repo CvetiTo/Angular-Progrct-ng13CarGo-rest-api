@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
     res.json(data);
 });
 
-router.post('/', isAuth(), async (req, res) => { //
-    console.log(req.user._id);
+router.post('/',  async (req, res) => { //isAuth(),
+    console.log(req.user);//._id
    
     const item = {
         loading: req.body.loading,
@@ -23,7 +23,7 @@ router.post('/', isAuth(), async (req, res) => { //
         type: req.body.type,
         tons: req.body.tons,
         price: req.body.price,
-        owner: req.user._id
+        owner: req.user //._id
     }
 
     try {
@@ -39,14 +39,14 @@ router.post('/', isAuth(), async (req, res) => { //
     //res.end();
 });
 
-router.get('/:id', preload(), (req, res) => {
+router.get('/:id',  (req, res) => { //preload(),
     const item = res.locals.item; //await api.getById(req.params.id);
     console.log('Read record')
     //res.end();
     res.json(item);
 });
 
-router.put('/:id', preload(), isOwner(), async (req, res) => {
+router.put('/:id',  isOwner(), async (req, res) => {//preload(),
     console.log('Update record')
     //res.end();
     const itemId = req.params.id;
